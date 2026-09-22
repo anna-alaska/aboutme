@@ -54,3 +54,28 @@ a,a:hover{color:var(--page-link)}
 .case-toggle-row{width:min(100%,var(--card-size));display:flex;justify-content:flex-end;margin-top:16px}
 .case-toggle-row>.case-toggle{animation:none}
 @media(max-width:700px){.case-toggle-row{width:var(--card-size);margin-left:24px}}
+/* Center the resume and first case card as a single composition. */
+@media(min-width:701px){
+  .portfolio{width:calc(318px + 20px + var(--card-size));max-width:calc(100% - 64px);margin-left:auto;margin-right:auto;grid-template-columns:318px minmax(0,1fr)}
+  .projects{padding-right:0;max-width:none}
+}
+@media(min-width:701px) and (max-width:1500px){
+  .portfolio{width:calc(278px + 28px + var(--card-size));grid-template-columns:278px minmax(0,1fr)}
+}
+@media(min-width:701px) and (max-width:1000px){
+  .portfolio{width:calc(250px + 24px + var(--card-size));max-width:calc(100% - 48px);grid-template-columns:250px minmax(0,1fr)}
+}
+@media(min-width:701px){
+  .project.is-expanded .gallery{width:calc(100% + (100vw - 100% - 318px - 20px)/2 - 24px);max-width:none}
+}
+@media(min-width:701px) and (max-width:1500px){
+  .project.is-expanded .gallery{width:calc(100% + (100vw - 100% - 278px - 28px)/2 - 24px)}
+}
+@media(min-width:701px) and (max-width:1000px){
+  .project.is-expanded .gallery{width:calc(100% + (100vw - 100% - 250px - 24px)/2 - 24px)}
+}
+.projects{gap:40px}
+.oracle{width:88%;margin-left:auto;margin-right:auto}
+@media(max-width:700px){.projects{gap:32px}}
+
+

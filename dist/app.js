@@ -32,7 +32,7 @@ if (oracleFrame) {
     if (!root) return;
     syncOracleTheme();
     oracleObserver?.disconnect();
-    const resize = () => { oracleFrame.style.height = `${Math.ceil(Math.max(root.getBoundingClientRect().height, root.scrollHeight)) + 2}px`; };
+    const resize = () => { oracleFrame.style.height = `${Math.ceil(root.getBoundingClientRect().height) + 2}px`; };
     oracleObserver = new ResizeObserver(resize);
     oracleObserver.observe(root);
     resize();
@@ -81,5 +81,6 @@ document.querySelectorAll('.gallery').forEach((gallery, index) => {
     gallery.scrollTo({left,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   });
 });
+
 
 
