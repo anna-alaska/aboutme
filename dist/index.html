@@ -7,10 +7,11 @@
   <meta name="theme-color" content="#ffffff">
   <title>Аня Сахник — продуктовый дизайнер</title>
   <link rel="stylesheet" href="fonts.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=theme-icons-8">
+  <script src="app.js?v=theme-icons-8" defer></script>
 </head>
 <body>
+  <button class="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false">☾</button>
   <main class="portfolio">
     <aside class="resume" aria-label="Резюме">
       <img class="portrait" src="assets/f7652.png" alt="Аня Сахник" width="166" height="138">
@@ -37,12 +38,15 @@
           <a href="https://t.me/Anna_Alaska" target="_blank" rel="noopener noreferrer">написать в telegram</a>
           <a href="mailto:anna.alaska@yandex.ru">написать на mail</a>
         </section>
+        <section class="oracle" aria-label="Микрооракул для HR">
+          <iframe id="oracle-frame" scrolling="no" src="oracle/index.html?v=theme-icons-8" title="Микрооракул для HR — спросить о собеседовании" height="600" loading="lazy"></iframe>
+        </section>
       </div>
     </aside>
     <div class="projects" aria-label="Проекты">
       <section class="project" aria-labelledby="montik-title">
         <div class="gallery" tabindex="0" role="region" aria-label="МонтикGPT — галерея, листайте влево и вправо">
-          <img class="card" src="assets/montik-cover.png" alt="МонтикGPT — корпоративный ассистент на экране телефона" width="542" height="542" fetchpriority="high">
+          <video class="card" src="assets/spayer-demo.mp4" poster="assets/montik-cover.png" aria-label="МонтикGPT — демонстрация корпоративного ассистента" width="542" height="542" autoplay muted loop playsinline preload="metadata"></video>
           <img class="card" src="assets/804f5.png" alt="МонтикGPT — точка входа" width="542" height="542">
           <img class="card" src="assets/a5b0f.png" alt="МонтикGPT — навигация" width="542" height="542" loading="lazy">
           <img class="card" src="assets/c0d2b.png" alt="МонтикGPT — интерфейс ассистента" width="542" height="542" loading="lazy">
@@ -93,6 +97,7 @@
       <section class="project" aria-labelledby="spayer-title">
         <div class="gallery" tabindex="0" role="region" aria-label="Спаер — галерея, листайте влево и вправо">
           <div class="card dark-card spayer-intro">
+            <video class="spayer-video" src="assets/montik-demo.mp4" aria-label="Спаер — демонстрация приложения" autoplay muted loop playsinline preload="metadata"></video>
             <h2>Спаер</h2>
             <p>Спаер — приложение для вайбовых прогулок. Мы делаем его вместе с мужем (backend, llm, ci/cd) как пет-проект. Идея пришла, когда он с одним другом гулял по Москве. Друг рассказывал интересные факты о зданиях и памятниках, которые встречались вокруг. Не у всех есть такой друг. Но у всех может быть Спаер.</p>
             <p class="radar-description">Работает как городской радар: по геометке приложение определяет местоположение и далее ищет здания или достопримечательности вокруг.</p>
@@ -107,3 +112,10 @@
   </main>
 </body>
 </html>
+
+
+
+
+
+
+

@@ -1,5 +1,55 @@
+const oracleFrame = document.querySelector('#oracle-frame');
+const themeToggle = document.querySelector('.theme-toggle');
+let currentTheme = 'light';
+try { currentTheme = localStorage.getItem('portfolio-theme') === 'dark' ? 'dark' : 'light'; } catch {}
+const syncOracleTheme = () => {
+  const root = oracleFrame?.contentDocument?.querySelector('#oracle-theme');
+  if (!root) return;
+  root.classList.toggle('light-theme', currentTheme === 'light');
+  root.classList.toggle('dark-theme', currentTheme === 'dark');
+  root.ownerDocument.documentElement.style.colorScheme = currentTheme;
+  root.ownerDocument.body.style.background = currentTheme === 'dark' ? '#101010' : '#f7f5ef';
+};
+const applyTheme = () => {
+  const dark = currentTheme === 'dark';
+  document.documentElement.dataset.theme = currentTheme;
+  themeToggle.textContent = dark ? '☀' : '☾';
+  themeToggle.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+  themeToggle.setAttribute('aria-pressed', String(dark));
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#101010' : '#f7f5ef';
+  syncOracleTheme();
+};
+themeToggle.addEventListener('click', () => {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('portfolio-theme', currentTheme); } catch {}
+  applyTheme();
+});
+applyTheme();
+if (oracleFrame) {
+  let oracleObserver;
+  const fitOracle = () => {
+    const root = oracleFrame.contentDocument?.querySelector('#oracle-theme');
+    if (!root) return;
+    syncOracleTheme();
+    oracleObserver?.disconnect();
+    const resize = () => { oracleFrame.style.height = `${Math.ceil(Math.max(root.getBoundingClientRect().height, root.scrollHeight)) + 2}px`; };
+    oracleObserver = new ResizeObserver(resize);
+    oracleObserver.observe(root);
+    resize();
+  };
+  oracleFrame.addEventListener('load', fitOracle);
+  fitOracle();
+}
+
 document.querySelectorAll('.gallery').forEach(gallery => {
-  let drag = null;
+gallery.addEventListener('wheel', event => {
+    if (event.ctrlKey || gallery.scrollWidth <= gallery.clientWidth) return;
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+    if (!delta) return;
+    event.preventDefault();
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1;
+    gallery.scrollLeft += delta * unit;
+  }, {passive: false});
   gallery.addEventListener('keydown', event => {
     if (event.target !== gallery || !['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
     event.preventDefault();
@@ -7,18 +57,7 @@ document.querySelectorAll('.gallery').forEach(gallery => {
     const left = event.key === 'Home' ? 0 : event.key === 'End' ? gallery.scrollWidth : gallery.scrollLeft + (event.key === 'ArrowRight' ? step : -step);
     gallery.scrollTo({left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
   });
-  gallery.addEventListener('pointerdown', event => {
-    if (event.pointerType !== 'mouse' || event.button !== 0) return;
-    drag = {x:event.clientX, left:gallery.scrollLeft};
-    gallery.setPointerCapture(event.pointerId);
-    gallery.classList.add('is-dragging');
-  });
-  gallery.addEventListener('pointermove', event => {
-    if (drag) gallery.scrollLeft = drag.left - (event.clientX - drag.x);
-  });
-  const end = () => {drag = null; gallery.classList.remove('is-dragging');};
-  gallery.addEventListener('pointerup', end);
-  gallery.addEventListener('pointercancel', end);
-  gallery.addEventListener('lostpointercapture', end);
-  gallery.addEventListener('dragstart', event => event.preventDefault());
 });
+
+
+
