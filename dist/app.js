@@ -43,29 +43,8 @@ if (oracleFrame) {
 
 document.querySelectorAll('.gallery').forEach((gallery, index) => {
   const project = gallery.closest('.project');
-  const cards = [...gallery.children].slice(1);
+  project.classList.add('is-expanded');
   gallery.id = `case-gallery-${index}`;
-  gallery.setAttribute('aria-label', project.querySelector('.caption')?.textContent || 'Материалы кейса');
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'case-toggle';
-  toggle.textContent = 'Развернуть кейс →';
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.setAttribute('aria-controls', gallery.id);
-  cards.forEach(card => { card.hidden = true; });
-  const toggleRow = document.createElement('div');
-  toggleRow.className = 'case-toggle-row';
-  toggleRow.append(toggle);
-  project.append(toggleRow);
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') !== 'true';
-    toggle.setAttribute('aria-expanded', String(expanded));
-    toggle.textContent = expanded ? '← Свернуть кейс' : 'Развернуть кейс →';
-    project.classList.toggle('is-expanded', expanded);
-    cards.forEach(card => { card.hidden = !expanded; });
-    if (!expanded) gallery.scrollLeft = 0;
-    toggle.focus({preventScroll:true});
-  });
   gallery.addEventListener('wheel', event => {
     if (event.ctrlKey || gallery.scrollWidth <= gallery.clientWidth) return;
     const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
@@ -81,6 +60,7 @@ document.querySelectorAll('.gallery').forEach((gallery, index) => {
     gallery.scrollTo({left,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   });
 });
+
 
 
 
