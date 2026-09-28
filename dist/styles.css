@@ -90,3 +90,19 @@ button,a{-webkit-tap-highlight-color:transparent}
   .project.is-expanded .gallery{width:100%;max-width:100%;min-width:0;padding-inline:24px;overflow-x:auto;overflow-y:hidden}
   .caption{overflow-wrap:anywhere}
 }
+.gallery>img.card{cursor:zoom-in}
+.gallery>img.card:focus-visible{outline:2px solid var(--page-link);outline-offset:-3px}
+.image-viewer{position:fixed;inset:0;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:64px 20px 20px;border:0;background:rgba(10,10,10,.96);color:white;overflow:hidden}
+.image-viewer[open]{display:flex;align-items:center;justify-content:center}
+.image-viewer::backdrop{background:rgba(0,0,0,.85)}
+.viewer-image{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.viewer-close{position:absolute;top:max(12px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:44px;height:44px;border:1px solid #ffffff80;border-radius:50%;background:#202020;color:white;font:32px/1 Arial,sans-serif;cursor:pointer}
+.viewer-close:focus-visible{outline:2px solid white;outline-offset:3px}
+@media(max-width:700px){.image-viewer{padding:64px 8px max(16px,env(safe-area-inset-bottom))}}
+.gallery>.card{cursor:zoom-in}
+.viewer-image{width:min(calc(100vw - 40px),calc(100dvh - 84px));height:min(calc(100vw - 40px),calc(100dvh - 84px));max-width:none;max-height:none}
+.viewer-image>.viewer-card{display:block!important;width:100%;height:100%;max-width:none;object-fit:contain;aspect-ratio:1;cursor:default;animation:none!important;outline:none}
+@media(max-width:700px){.viewer-image{width:min(calc(100vw - 16px),calc(100dvh - 84px));height:min(calc(100vw - 16px),calc(100dvh - 84px))}}
+.gallery>.card,.gallery>.card *,.image-viewer,.image-viewer *{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+.gallery img,.image-viewer img,.image-viewer video{-webkit-user-drag:none}
+.gallery>.card:focus:not(:focus-visible),.viewer-close:focus:not(:focus-visible){outline:none}
