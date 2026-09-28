@@ -1,0 +1,9 @@
+@media (hover:hover) and (pointer:fine){
+  html,body,body *{cursor:url('assets/cursor-silver.svg') 4 3,auto}
+  body .gallery>.card,body .gallery>.card *,button,a{cursor:url('assets/cursor-wand.svg') 10 10,pointer}
+  input,textarea,[contenteditable=true]{cursor:text}
+}
+.cursor-spark{position:fixed;z-index:2147483647;pointer-events:none;user-select:none;color:#dce4ef;text-shadow:0 0 2px #4e5d73,0 0 7px #ffffffa0;line-height:1;animation:cursor-spark-fade .65s ease-out forwards}
+@keyframes cursor-spark-fade{from{opacity:.85;transform:translate(-50%,-50%) scale(.5) rotate(0deg)}to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1) rotate(65deg)}}
+@media(prefers-reduced-motion:reduce){.cursor-spark{display:none}}
+
